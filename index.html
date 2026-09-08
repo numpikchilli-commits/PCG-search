@@ -1,1 +1,19 @@
-
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>PCG Search</title>
+<style>
+*{box-sizing:border-box}html,body{margin:0;min-height:100%}body{min-height:100vh;display:flex;flex-direction:column;background:#f5f7fb;color:#163b67;font-family:Arial,sans-serif}header{height:67px;padding:0 14px;display:flex;align-items:center;justify-content:space-between;background:#063b70;color:#fff}.brand{display:flex;align-items:center;gap:8px;font-size:19px;font-weight:700}.pets{display:flex;width:32px;align-items:center}.pets img{width:22px;height:22px;border:2px solid #fff;border-radius:50%;object-fit:cover}.pets img+img{margin-left:-5px}.login{padding:9px 14px;border:0;border-radius:6px;background:#fff;color:#063b70;font-size:13px}main{flex:1;padding-top:22px}.search{display:block;width:min(430px,calc(100% - 32px));margin:auto;padding:11px 12px;border:1px solid #cbd0d8;border-radius:6px;outline:0;background:#fff;font-size:13px}.search:focus{border-color:#063b70}.results{display:none;width:min(900px,calc(100% - 32px));margin:22px auto;overflow:auto}table{width:100%;border-collapse:collapse;background:#fff;font-size:13px}th,td{padding:12px;border:1px solid #dce2eb;text-align:left}th{background:#e9eff7}footer{padding:29px 16px;background:#063b70;color:#fff;font-size:13px;font-weight:600;text-align:center}
+</style>
+</head>
+<body>
+<header><div class="brand"><span class="pets"><img src="https://images.unsplash.com/photo-1587300003388-59208cc962cb?auto=format&fit=crop&w=80&h=80&q=80" alt="หมา"><img src="https://images.unsplash.com/photo-1518791841217-8f162f1e1131?auto=format&fit=crop&w=80&h=80&q=80" alt="แมว"></span><span>PCG Search</span></div><button class="login">Login with Google</button></header>
+<main><input id="search" class="search" placeholder="พิมพ์รหัสหรือชื่อแล้วกด Enter..." autocomplete="off"><div id="results" class="results"><table><thead><tr><th>รหัสสินค้า</th><th>ชื่อสินค้า</th><th>ประเภท</th><th>รายละเอียด</th></tr></thead><tbody id="rows"></tbody></table></div></main>
+<footer>Made by PCG Packing | Powered by local database</footer>
+<script>
+const products=[{code:'PCG-001',name:'กล่องกระดาษคราฟท์',type:'กล่องกระดาษ',detail:'กล่องพับพร้อมพิมพ์โลโก้'},{code:'PCG-002',name:'ถุงซิปล็อกใส',type:'ซองและถุง',detail:'เหมาะสำหรับสินค้าอาหารและของใช้'},{code:'PCG-003',name:'ฉลากสินค้า Harvest',type:'ฉลากสินค้า',detail:'สติกเกอร์กระดาษเนื้อด้าน'}];const search=document.getElementById('search'),results=document.getElementById('results'),rows=document.getElementById('rows');function safe(v){return String(v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}search.oninput=()=>{const q=search.value.trim().toLowerCase(),found=products.filter(p=>q&&Object.values(p).some(v=>String(v).toLowerCase().includes(q)));rows.innerHTML=found.map(p=>`<tr><td>${safe(p.code)}</td><td>${safe(p.name)}</td><td>${safe(p.type)}</td><td>${safe(p.detail)}</td></tr>`).join('');results.style.display=q?'block':'none'};
+</script>
+</body>
+</html>
